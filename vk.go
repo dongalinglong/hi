@@ -21,8 +21,9 @@ func obtainTokens() (access, refresh string, err error) {
 		},
 	}
 	authUrl := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
-	open.Run(url.QueryEscape(authUrl))
+	open.Run(authUrl)
 
+	fmt.Print("Enter code: ")
 	var code string
 	_, er := fmt.Scan(&code)
 	if er != nil {
