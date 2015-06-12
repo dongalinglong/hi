@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/url"
 
 	"github.com/skratchdot/open-golang/open"
 	"golang.org/x/oauth2"
@@ -19,8 +20,8 @@ func obtainTokens() (access, refresh string, err error) {
 			TokenURL: "https://oauth.vk.com/access_token",
 		},
 	}
-	url := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
-	open.Run(url)
+	authUrl := conf.AuthCodeURL("state", oauth2.AccessTypeOffline)
+	open.Run(url.QueryEscape(authUrl))
 
 	var code string
 	_, er := fmt.Scan(&code)
